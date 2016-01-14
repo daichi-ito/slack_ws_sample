@@ -7,7 +7,7 @@
 <body>
 <h1>this is sample</h1>
 
-<div id="dings"></div>
+<ul id="dings"></ul>
 
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
@@ -17,7 +17,7 @@
         var $li = $('<li>');
         $li.text(userInfo.name);
         $li.append($('<img>').attr('src', userInfo.image));
-        $('#dings').append();
+        $('#dings').append($li);
     });
 </script>
 
