@@ -16,17 +16,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.post('/hook', (req, res)=> {
-    console.log(req.body);
     if (req.body.token == SLACK_TOKEN) {
 
-        request(`https://slack.com/api/users.info?token=${SLACK_WEBAPI_TOKEN}&user=${'U02MQ41JZ'}`, (error, res, body)=> {
-            console.log(error);
-            console.log('res:', res);
-            console.log('body:', body);
-            if (body.ok == true) {
-                let name = body.user.name;
-                let image = body.user.profile.image_48;
-                io.emit('ding', {name: name, image: image});
+        request(`https://slack.com/api/users.info?token=${SLACK_WEBAPI_TOKEN}&user=${req.body.user_id}`, (error, userInfoRes, body)=> {
+            var jsonBody = JSON.parse(body);
+            if (jsonBody.ok == true) {
+                io.emit('ding', {name: jsonBody.user.name, image: jsonBody.user.profile.image_48});
             } else {
                 io.emit('ding', {error: true});
             }
