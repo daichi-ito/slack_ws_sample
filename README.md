@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/wiki/daichi-ito/slack_ws_sample/slack_ws_sample.gif)
+
 # Installation
 
 ```
